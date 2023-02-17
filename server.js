@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 8080;
 
@@ -12,8 +11,8 @@ console.log(`Ouvindo na porta ${port}`)
 mongoose.connect(process.env.MONGO_URL);
 
 
-app.get('/users', (req,res)=>{
-    res.json({id:1})
+app.get('/users', (req, res) => {
+    res.json({ id: 1 })
 })
 
 app.post('/', (req, res) => {
@@ -22,12 +21,10 @@ app.post('/', (req, res) => {
     res.send('Got a POST request')
 })
 
-app.post('/newUser', (req,res) =>{
-    
-    if(req.body.user == process.env.USER && req.body.password == process.env.PASSWORD){
+app.post('/newUser', (req, res) => {
+    if (req.body.user == process.env.USER && req.body.password == process.env.PASSWORD) {
         return res.end()
     }
-    
     console.log(token);
     req.json(token);
 })
