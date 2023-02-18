@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
 import * as UserController from './Controller/UserController.js';
-
+import Auth from './Auth/Auth.js';
 config({
     path: '.env'
 });
@@ -11,11 +11,10 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.json());
-
-let MONGO_URL = `mongodb://${process.env.DATABASE_USER}:`;
-MONGO_URL += `${process.env.DATABASE_PASSWORD}@`;
-MONGO_URL += `${process.env.DATABASE_URL}:`;
+app.use(Auth.validateToken)
+let MONGO_URL = `mongodb://${process.env.DATABASE_URL}:`;
 MONGO_URL += `${process.env.DATABASE_PORT}`;
+MONGO_URL += `/${process.env.DATABASE_DB}`;
 
 mongoose.set('strictQuery', false);
 
@@ -44,7 +43,13 @@ app.delete('/users/$id', (req, res) => {
     req.json(token);
 })
 
-mongoose.connect(MONGO_URL).then(
+mongoose.connect(MONGO_URL,
+    {
+        "authSource": "admin",
+        "user": process.env.DATABASE_USER,
+        "pass": process.env.DATABASE_PASSWORD
+    }
+).then(
     () => {
         console.log('Connected to', process.env.DATABASE_DB)
         app.listen(port, () => {
