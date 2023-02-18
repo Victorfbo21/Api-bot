@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
+import Routers from './Routes';
+import AuthController from './Controller/AuthController.js';
 
 config({
     path: '.env'
@@ -10,6 +12,8 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.json());
+app.use('/users', AuthController.validateToken, Routers.UsersRouter);
+
 let MONGO_URL = `mongodb://${process.env.DATABASE_URL}:`;
 MONGO_URL += `${process.env.DATABASE_PORT}`;
 MONGO_URL += `/${process.env.DATABASE_DB}`;
