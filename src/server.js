@@ -6,9 +6,7 @@ import * as UserController from './Controller/UserController.js';
 config({
     path: '.env'
 });
-
-const port = process.env.PORT || 8080;
-
+const port =8080;
 const app = express();
 app.use(express.json());
 
@@ -16,11 +14,10 @@ let MONGO_URL = `mongodb://${process.env.DATABASE_USER}:`;
 MONGO_URL += `${process.env.DATABASE_PASSWORD}@`;
 MONGO_URL += `${process.env.DATABASE_URL}:`;
 MONGO_URL += `${process.env.DATABASE_PORT}`;
-
 mongoose.set('strictQuery', false);
 
 app.get('/users', (req, res) => {
-    res.json({ id: 1 })
+     return console.log('Online');
 })
 
 app.put('/users', (req, res) => {
@@ -31,8 +28,6 @@ app.patch('/users/$id', (req, res) => {
     if (req.body.user == process.env.USER && req.body.password == process.env.PASSWORD) {
         return res.end()
     }
-    console.log(token);
-    req.json(token);
 
 })
 
@@ -40,8 +35,7 @@ app.delete('/users/$id', (req, res) => {
     if (req.body.user == process.env.USER && req.body.password == process.env.PASSWORD) {
         return res.end()
     }
-    console.log(token);
-    req.json(token);
+   
 })
 
 mongoose.connect(MONGO_URL).then(
