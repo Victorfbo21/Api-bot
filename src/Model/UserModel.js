@@ -1,4 +1,5 @@
 import UserSchema from '../Schemas/UserSchema.js'
+
 export const InsertUser = (user) => {
     console.log(user);
     const userCreated = new UserSchema({ ...user });
