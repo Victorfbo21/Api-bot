@@ -38,6 +38,7 @@ const validateToken = (req, res, next) => {
 
 //TODO: terminar
 const login = async (req, res) => {
+    res.send("Chegou no login");
     return AuthModel.login(req.body);
 }
 

@@ -1,5 +1,5 @@
-import UsersRouter from "./UserRoutes";
-import AuthRouter from "./AuthRoutes";
+import UsersRouter from "./UserRoutes.js";
+import AuthRouter from "./AuthRoutes.js";
 export default {
     UsersRouter,
     AuthRouter

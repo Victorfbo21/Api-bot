@@ -1,6 +1,6 @@
 import UserSchema from '../Schemas/UserSchema.js'
 
-export const InsertUser = (user) => {
+const insertUser = (user) => {
     console.log(user);
     const userCreated = new UserSchema({ ...user });
     return userCreated.save().then(
@@ -14,4 +14,8 @@ export const InsertUser = (user) => {
             return null;
         }
     )
+}
+
+export default {
+    insertUser
 }
