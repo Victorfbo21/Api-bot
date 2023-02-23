@@ -1,7 +1,15 @@
 import UserModel from '../Model/UserModel.js'
 
-const getUsers = () => {
+const getUsers =  async (req,res) => {
+    const find = await UserModel.getUsers();
+    console.log(find);
 
+    if(find){
+        res.status(200).send(find.name)
+    }
+    else{
+        res.status(500).send({message: err.message})
+    }
 }
 
 const insertUser = async (req, res) => {
