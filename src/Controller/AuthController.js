@@ -1,14 +1,15 @@
 import jwt from 'jsonwebtoken'
 import AuthModel from '../Model/AuthModel.js';
-const secret = process.env.TOKEN_SECRET;
 
-const getToken = (id, role) => {
+const getToken = (id, role = 'user') => {
+    const secret = process.env.TOKEN_SECRET;
+
     const user = {
         id,
-        role: 'user'
+        role
     }
-    const token = jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: Number.parser(process.env.TOKEN_LIFE) });
-    const refreshToken = jwt.sign(user, config.refreshTokenSecret, { expiresIn: process.env.TOKEN_REFRESH_LIFE })
+    const token = jwt.sign(user, secret, { expiresIn: Number.parseInt(process.env.TOKEN_LIFE) });
+    const refreshToken = jwt.sign(user, secret, { expiresIn: Number.parseInt(process.env.TOKEN_REFRESH_LIFE) })
     const response = {
         "status": "Logged in",
         "token": token,
@@ -18,7 +19,9 @@ const getToken = (id, role) => {
 }
 
 const validateToken = (req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
+    const secret = process.env.TOKEN_SECRET;
+    let token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
+    token = token.replace('Bearer', '').replace('bearer', '').replace(' ', '');
     if (token) {
         // verifies secret and checks exp
         jwt.verify(token, secret, function (err, decoded) {
@@ -36,10 +39,10 @@ const validateToken = (req, res, next) => {
     }
 }
 
-//TODO: terminar
 const login = async (req, res) => {
-    res.send("Chegou no login");
-    return AuthModel.login(req.body);
+    const user = await AuthModel.login(req.body);
+    const token = getToken(user._id, 'user');
+    res.send({ user, token });
 }
 
 export default {
