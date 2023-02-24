@@ -1,7 +1,6 @@
 import UserSchema from '../Schemas/UserSchema.js'
 
 const insertUser = (user) => {
-    console.log(user);
     const userCreated = new UserSchema({ ...user });
     return userCreated.save().then(
         (o) => {
@@ -16,6 +15,27 @@ const insertUser = (user) => {
     )
 }
 
+const getUsers = () => {
+    return UserSchema.find().then(
+        (o) => {
+            console.log('Users Found');
+            return o;
+        }
+    ).catch(
+        (e) => {
+            console.log('Error on Users Found', e)
+            return null;
+        }
+    )
+        
+               
+               
+      
+}
+
+
+
 export default {
-    insertUser
+    insertUser,
+    getUsers
 }

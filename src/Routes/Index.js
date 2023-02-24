@@ -1,6 +1,13 @@
-import UsersRouter from "./UserRoutes.js";
+import UserRouter from "./UserRoutes.js";
 import AuthRouter from "./AuthRoutes.js";
-export default {
-    UsersRouter,
-    AuthRouter
-}
+import SignupRouter from "./SignupRoutes.js";
+import AuthController from "../Controller/AuthController.js";
+import { Router } from "express";
+
+const Routers = Router();
+
+Routers.use("/users", AuthController.validateToken, UserRouter);
+Routers.use("/signup", SignupRouter);
+Routers.use("/auth", AuthRouter);
+
+export default Routers;
