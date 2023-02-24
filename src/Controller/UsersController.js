@@ -1,5 +1,6 @@
 import UserModel from '../Model/UserModel.js'
 
+//TODO: Insert req.query to limit, filter and sort
 const getUsers = async (req, res) => {
   const find = await UserModel.getUsers()
   if (find) {
@@ -20,6 +21,9 @@ const insertUser = async (req, res) => {
     res.status(500)
   }
 }
+
+//TODO: Delete and Update
+
 
 const signup = async (req, res) => {
   const user = req.body
