@@ -11,6 +11,4 @@ UsersRouter.put('/', (req, res) => {
     return UsersController.insertUser(req, res);
 })
 
-
-
 export default UsersRouter;
