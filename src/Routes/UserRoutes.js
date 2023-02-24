@@ -1,16 +1,14 @@
-import { Router } from "express";
-import UsersController from "../Controller/UsersController.js";
+import { Router } from 'express'
+import UsersController from '../Controller/UsersController.js'
 
-const UsersRouter = Router();
+const UsersRouter = Router()
 
 UsersRouter.get('/', (req, res) => {
-    return UsersController.getUsers(req, res);
+  return UsersController.getUsers(req, res)
 })
 
 UsersRouter.put('/', (req, res) => {
-    return UsersController.insertUser(req, res);
+  return UsersController.insertUser(req, res)
 })
 
-
-
-export default UsersRouter;
+export default UsersRouter
