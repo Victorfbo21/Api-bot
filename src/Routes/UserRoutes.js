@@ -11,4 +11,6 @@ UsersRouter.put('/', (req, res) => {
   return UsersController.insertUser(req, res)
 })
 
+// TODO: Delete/:id and Update/:id
+
 export default UsersRouter
