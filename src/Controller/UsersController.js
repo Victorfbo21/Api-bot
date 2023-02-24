@@ -1,3 +1,4 @@
+import AuthModel from '../Model/AuthModel.js';
 import UserModel from '../Model/UserModel.js'
 
 const getUsers = async (req, res) => {

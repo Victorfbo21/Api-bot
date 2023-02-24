@@ -3,6 +3,10 @@ import { Router } from "express";
 
 const AuthRouter = Router();
 
-AuthRouter.post('/login', AuthController.login);
+AuthRouter.post('/', (req, res) => {
+    return AuthController.login(req, res);
+})
+
+
 
 export default AuthRouter;

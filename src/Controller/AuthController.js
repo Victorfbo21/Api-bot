@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import AuthModel from '../Model/AuthModel.js';
-
+import encodePassword from '../Utils/password.js';
 const getToken = (id, role = 'user') => {
     const secret = process.env.TOKEN_SECRET;
 
@@ -39,10 +39,15 @@ const validateToken = (req, res, next) => {
     }
 }
 
+
 const login = async (req, res) => {
-    const user = await AuthModel.login(req.body);
-    const token = getToken(user._id, 'user');
-    res.send({ user, token });
+    const user = req.body;
+    const password = user.password
+    const hash = encodePassword(password);
+    user.password = hash
+    const logged = await AuthModel.login(req.body);
+    const token = getToken(logged, 'user');
+    res.send({ logged, token });
 }
 
 export default {

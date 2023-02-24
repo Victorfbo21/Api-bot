@@ -27,13 +27,7 @@ const getUsers = () => {
             return null;
         }
     )
-        
-               
-               
-      
 }
-
-
 
 export default {
     insertUser,
