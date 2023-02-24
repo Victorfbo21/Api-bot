@@ -8,7 +8,8 @@ const Routers = Router();
 
 Routers.use("/users", AuthController.validateToken, UserRouter);
 Routers.use("/signup", SignupRouter);
-Routers.use("/login", AuthRouter);
+Routers.use("/login", AuthRouter
+);
 
 
 export default Routers;
