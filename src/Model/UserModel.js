@@ -43,8 +43,25 @@ const deleteUser = (id) => {
   )
 }
 
+
+
+const updateUser = (id, update) => {
+  return UserSchema.findByIdAndUpdate(id, update).then(
+    (o) => {
+      console.log('User Deleted')
+      return o
+    }
+  ).catch(
+    (e) => {
+      console.log('Error on Delete User')
+    }
+
+  )
+}
+
 export default {
   insertUser,
   getUsers,
-  deleteUser
+  deleteUser,
+  updateUser
 }

@@ -14,6 +14,11 @@ UsersRouter.put('/', (req, res) => {
 UsersRouter.delete('/:id', (req, res) => {
   return UsersController.deleteUser(req, res)
 })
+
+UsersRouter.patch('/:id', (req, res) => {
+  return UsersController.updateUser(req, res)
+})
+
 // TODO: Delete/:id and Update/:id
 
 export default UsersRouter
