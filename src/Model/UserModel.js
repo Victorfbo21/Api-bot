@@ -48,12 +48,12 @@ const deleteUser = (id) => {
 const updateUser = (id, update) => {
   return UserSchema.findByIdAndUpdate(id, update).then(
     (o) => {
-      console.log('User Deleted')
+      console.log('Updated User')
       return o
     }
   ).catch(
     (e) => {
-      console.log('Error on Delete User')
+      console.log('Error on Updated User')
     }
 
   )

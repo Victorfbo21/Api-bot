@@ -42,7 +42,7 @@ const updateUser = async (req, res) => {
   const userUpdate = await UserModel.updateUser(id, update)
   if (userUpdate) {
     res.status(201)
-    res.send()
+    res.send(userUpdate._id)
   }
   else {
     res.status(500)
