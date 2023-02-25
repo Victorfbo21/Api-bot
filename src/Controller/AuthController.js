@@ -21,8 +21,9 @@ const getToken = (id, role = 'user') => {
 const validateToken = (req, res, next) => {
   const secret = process.env.TOKEN_SECRET
   let token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers.authorization
-  token = token.replace('Bearer', '').replace('bearer', '').replace(' ', '')
+
   if (token) {
+    token = token.replace('Bearer', '').replace('bearer', '').replace(' ', '')
     // verifies secret and checks exp
     jwt.verify(token, secret, function (err, decoded) {
       if (err) {

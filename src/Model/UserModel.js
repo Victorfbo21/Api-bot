@@ -29,7 +29,22 @@ const getUsers = () => {
   )
 }
 
+const deleteUser = (id) => {
+  return UserSchema.findByIdAndRemove(id).then(
+    (o) => {
+      console.log('User Deleted')
+      return o
+    }
+  ).catch(
+    (e) => {
+      console.log('Error on Delete User')
+    }
+
+  )
+}
+
 export default {
   insertUser,
-  getUsers
+  getUsers,
+  deleteUser
 }

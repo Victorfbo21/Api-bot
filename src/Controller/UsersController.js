@@ -23,6 +23,18 @@ const insertUser = async (req, res) => {
 }
 
 // TODO: Delete and Update
+const deleteUser = async (req, res) => {
+  const id = req.params.id
+  const userDeleted = await UserModel.deleteUser(id)
+  if (userDeleted) {
+    res.status(201)
+    res.send(userDeleted._id)
+  }
+  else {
+    res.status(500)
+  }
+
+}
 
 const signup = async (req, res) => {
   const user = req.body
@@ -39,5 +51,6 @@ const signup = async (req, res) => {
 export default {
   getUsers,
   insertUser,
-  signup
+  signup,
+  deleteUser
 }
