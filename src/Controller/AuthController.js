@@ -29,7 +29,7 @@ const validateToken = (req, res, next) => {
       if (err) {
         return res.status(401).json({ error: true, message: 'Unauthorized access.' })
       }
-      req.decoded = decoded
+      req.userContext = decoded
       next()
     })
   } else {
