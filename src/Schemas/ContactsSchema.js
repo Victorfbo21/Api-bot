@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
-import OwnerHelper from '../Utils/OwnerHelper'
+import OwnerHelper from '../Utils/OwnerHelper.js'
 
 const ContactsSchema = new mongoose.Schema({
   name: { type: String },
-  phone: { type: String, unique: true, required: true, validate: validateNumber },
-  ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', require: true }
+  phone: { type: String, required: true, validate: validateNumber },
+  ownerId: String
 }, {
   timestamps: true
 })
@@ -15,6 +15,8 @@ function validateNumber (telefone) {
 }
 
 ContactsSchema.pre('save', OwnerHelper.setOwnerPreSave)
+
+ContactsSchema.pre('find', OwnerHelper.findByOwner)
 
 const Contacts = mongoose.model('Contacts', ContactsSchema)
 

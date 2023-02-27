@@ -1,14 +1,18 @@
 import userContextInstance from './UserContext.js'
 
-const setOwnerPreSave = next => {
+const setOwnerPreSave = function (next) {
   const data = this
-  if (Object.keys(data).length && Object.keys(data).ownerId) {
+  if (Object.keys(data).length) {
     data.ownerId = userContextInstance.getPropertyByName('id')
-    return next()
   }
-  return next()
+  next()
+}
+
+const findByOwner = function () {
+  this.where({ ownerId: userContextInstance.getPropertyByName('id') })
 }
 
 export default {
-  setOwnerPreSave
+  setOwnerPreSave,
+  findByOwner
 }

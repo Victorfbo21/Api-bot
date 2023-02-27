@@ -9,11 +9,12 @@ config({
 const app = express()
 const port = process.env.PORT || 8080
 app.use(express.json())
+
 app.use((req, res, next) => {
   console.log(req.originalUrl, ' Time:', new Date().toUTCString())
+  userContextInstance.destroy()
   next()
 })
-app.use(userContextInstance.destroy())
 app.use(Routers)
 
 dbConnect().then(r => {

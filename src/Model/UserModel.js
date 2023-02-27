@@ -4,7 +4,6 @@ const insertUser = (user) => {
   const userCreated = new UserSchema({ ...user })
   return userCreated.save().then(
     (o) => {
-      console.log('User Inserted')
       return o
     }
   ).catch(
@@ -18,7 +17,6 @@ const insertUser = (user) => {
 const getUsers = () => {
   return UserSchema.find().then(
     (o) => {
-      console.log('Users Found')
       return o
     }
   ).catch(
@@ -32,7 +30,6 @@ const getUsers = () => {
 const deleteUser = (id) => {
   return UserSchema.findByIdAndRemove(id).then(
     (o) => {
-      console.log('User Deleted')
       return o
     }
   ).catch(
@@ -46,7 +43,6 @@ const deleteUser = (id) => {
 const updateUser = (id, update) => {
   return UserSchema.findByIdAndUpdate(id, update).then(
     (o) => {
-      console.log('Updated User')
       return o
     }
   ).catch(

@@ -3,7 +3,7 @@ import { Router } from 'express'
 
 const AuthRouter = Router()
 
-AuthRouter.post('/', (req, res) => {
+AuthRouter.post('/login', (req, res) => {
   return AuthController.login(req, res)
 })
 

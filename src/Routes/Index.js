@@ -9,7 +9,7 @@ const Routers = Router()
 
 Routers.use('/users', AuthController.validateToken, UserRouter)
 Routers.use('/signup', SignupRouter)
-Routers.use('/login', AuthRouter)
-Routers.use('/contact', ContactsRouter)
+Routers.use('/auth', AuthRouter)
+Routers.use('/contacts', AuthController.validateToken, ContactsRouter)
 
 export default Routers

@@ -25,18 +25,16 @@ const validateToken = (req, res, next) => {
 
   if (token) {
     token = token.replace('Bearer', '').replace('bearer', '').replace(' ', '')
-    // verifies secret and checks exp
     jwt.verify(token, secret, function (err, decoded) {
       if (err) {
-        return res.status(401).json({ error: true, message: 'Unauthorized access.' })
+        return res.send(401).json({ error: true, message: 'Unauthorized access.' })
       }
       req.userContext = decoded
-      userContextInstance.setPropertyValue('id', req.userContext.id)
-      userContextInstance.setPropertyValue('role', req.userContext.role)
+      userContextInstance.setGlobalState(req.userContext)
       next()
     })
   } else {
-    return res.status(403).send({
+    return res.send(403).send({
       error: true,
       message: 'No token provided.'
     })
@@ -45,12 +43,12 @@ const validateToken = (req, res, next) => {
 
 const login = async (req, res) => {
   const user = req.body
-  const password = user.password
-  const hash = encodePassword(password)
-  user.password = hash
-  const logged = await AuthModel.login(req.body)
-  const token = getToken(logged, 'user')
-  res.send({ logged, token })
+  user.password = encodePassword(user.password)
+  const logged = await AuthModel.login(user)
+  if (logged) {
+    const auth = getToken(logged, 'user')
+    res.send({ logged, auth })
+  } else { res.send(401) }
 }
 
 export default {

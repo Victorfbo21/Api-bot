@@ -26,6 +26,10 @@ class UserContext {
     globalState[propertyName] = propertyValue
   }
 
+  setGlobalState (newState) {
+    globalState = newState
+  }
+
   destroy () {
     globalState = initialState()
   }
