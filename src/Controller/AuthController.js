@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import AuthModel from '../Model/AuthModel.js'
 import encodePassword from '../Utils/passwordHelper.js'
+import userContextInstance from '../Utils/UserContext.js'
 const getToken = (id, role = 'user') => {
   const secret = process.env.TOKEN_SECRET
 
@@ -30,6 +31,7 @@ const validateToken = (req, res, next) => {
         return res.status(401).json({ error: true, message: 'Unauthorized access.' })
       }
       req.userContext = decoded
+      userContextInstance.setPropertyValue('user', req.userContext);
       next()
     })
   } else {
