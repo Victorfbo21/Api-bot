@@ -22,29 +22,25 @@ const insertUser = async (req, res) => {
   }
 }
 
-// TODO: Delete and Update
 const deleteUser = async (req, res) => {
   const id = req.params.id
   const userDeleted = await UserModel.deleteUser(id)
   if (userDeleted) {
     res.status(201)
     res.send(userDeleted._id)
-  }
-  else {
+  } else {
     res.status(500)
   }
-
 }
 
 const updateUser = async (req, res) => {
-  const id = req.params.id;
-  const update = { $set: req.body };
+  const id = req.params.id
+  const update = { $set: req.body }
   const userUpdate = await UserModel.updateUser(id, update)
   if (userUpdate) {
     res.status(201)
     res.send(userUpdate._id)
-  }
-  else {
+  } else {
     res.status(500)
   }
 }

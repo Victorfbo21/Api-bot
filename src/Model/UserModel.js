@@ -43,8 +43,6 @@ const deleteUser = (id) => {
   )
 }
 
-
-
 const updateUser = (id, update) => {
   return UserSchema.findByIdAndUpdate(id, update).then(
     (o) => {
