@@ -31,7 +31,8 @@ const validateToken = (req, res, next) => {
         return res.status(401).json({ error: true, message: 'Unauthorized access.' })
       }
       req.userContext = decoded
-      userContextInstance.setPropertyValue('user', req.userContext);
+      userContextInstance.setPropertyValue('id', req.userContext.id)
+      userContextInstance.setPropertyValue('role', req.userContext.role)
       next()
     })
   } else {
