@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import AuthModel from '../Model/AuthModel.js'
-import encodePassword from '../Utils/password.js'
+import encodePassword from '../Utils/passwordHelper.js'
 const getToken = (id, role = 'user') => {
   const secret = process.env.TOKEN_SECRET
 
