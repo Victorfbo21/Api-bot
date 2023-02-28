@@ -14,14 +14,19 @@ const insertUser = (user) => {
   )
 }
 
-const getUsers = () => {
-  return UserSchema.find().then(
+const getUsers = (filter, skip, limit) => {
+  filter = filter || ''
+  return UserSchema.find({
+    $or: [
+      { name: new RegExp('.*' + filter + '.*', 'i') },
+      { phone: new RegExp('.*' + filter + '.*', 'i') }
+    ]
+  }).skip(skip || 0).limit(limit || 0).then(
     (o) => {
       return o
     }
   ).catch(
     (e) => {
-      console.log('Error on Users Found', e)
       return null
     }
   )

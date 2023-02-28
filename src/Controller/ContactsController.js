@@ -3,11 +3,17 @@ import ContactsModel from '../Model/ContactsModel.js'
 // TODO: verify exists contact on user
 const insertContact = async (req, res) => {
   const contact = req.body
-  const created = await ContactsModel.insertContact(contact)
-  if (created) {
-    res.status(201).send(created._id)
+  const contacts = await ContactsModel.getContacts(req.body.phone, 0, 0)
+  if (Object.values(contacts).length === 0) {
+    const created = await ContactsModel.insertContact(contact)
+    if (created) {
+      res.status(201).send(created._id)
+    } else {
+      res.send(500)
+    }
   } else {
-    res.send(500)
+    res.statusCode = 400
+    res.json({ message: 'Usuário Já Cadastrado ! ' })
   }
 }
 

@@ -19,6 +19,4 @@ UsersRouter.patch('/:id', (req, res) => {
   return UsersController.updateUser(req, res)
 })
 
-// TODO: Delete/:id and Update/:id
-
 export default UsersRouter

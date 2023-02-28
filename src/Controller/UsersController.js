@@ -2,7 +2,7 @@ import UserModel from '../Model/UserModel.js'
 
 // TODO: Insert req.query to limit, filter and sort
 const getUsers = async (req, res) => {
-  const find = await UserModel.getUsers()
+  const find = await UserModel.getUsers(req.query.filter, req.query.skip, req.query.limit)
   if (find) {
     res.send(200)
   } else {
