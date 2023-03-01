@@ -1,17 +1,22 @@
 import ContactsSchema from '../Schemas/ContactsSchema.js'
 
-const insertContact = (contact) => {
-  const contactCreated = new ContactsSchema({ ...contact })
-  return contactCreated.save().then(
-    (o) => {
-      return o
-    }
-  ).catch(
-    (e) => {
-      console.log('Error on Contact Inserted', e)
-      return null
-    }
-  )
+const insertContact = async (contact) => {
+  const contacts = await getContacts(contact.phone, 0, 0)
+  if (Object.values(contacts).length === 0) {
+    const contactCreated = new ContactsSchema({ ...contact })
+    return contactCreated.save().then(
+      (o) => {
+        return o
+      }
+    ).catch(
+      (e) => {
+        console.log('Error on Contact Inserted', e)
+        return null
+      }
+    )
+  } else {
+    return console.log('Usuário ja Cadastrado !')
+  }
 }
 
 const getContacts = (filter, skip, limit) => {
