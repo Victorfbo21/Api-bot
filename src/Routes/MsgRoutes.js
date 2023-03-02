@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import MsgController from '../Controller/MsgController'
+import MsgController from '../Controller/MsgController.js'
 
 const MsgRouter = Router()
 
@@ -18,3 +18,5 @@ MsgRouter.delete('/:id', (req, res) => {
 MsgRouter.patch('/:id', (req, res) => {
   return MsgController.updateMsg(req, res)
 })
+
+export default MsgRouter
