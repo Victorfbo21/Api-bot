@@ -2,6 +2,7 @@ import UserSchema from '../Schemas/UserSchema.js'
 
 const insertUser = (user) => {
   const userCreated = new UserSchema({ ...user })
+  console.log(userCreated)
   return userCreated.save().then(
     (o) => {
       return o
