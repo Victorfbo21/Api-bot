@@ -12,17 +12,17 @@ const UserSchema = new mongoose.Schema({
   timestamps: true
 })
 
-function validateEmail(email) {
+function validateEmail (email) {
   const expression = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/
   return expression.test(email)
 };
 
-function validatePhone(phone) {
+function validatePhone (phone) {
   const expressionNumber = /^\s*(\d{2}|\d{0})[-. ]?(\d{5}|\d{4})[-. ]?(\d{4})[-. ]?\s*$/
   return expressionNumber.test(phone)
 }
 
-function validateDocument(doc) {
+function validateDocument (doc) {
   const expressionDocumento = /([0 - 9]{ 2}[.]?[0 - 9]{ 3 } [.] ? [0 - 9]{ 3 } [/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})/
   return expressionDocumento.test(doc)
 }

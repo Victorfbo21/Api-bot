@@ -15,7 +15,6 @@ const MsgSchema = new mongoose.Schema({
   timestamps: true
 })
 
-
 MsgSchema.pre('save', OwnerHelper.setOwnerPreSave)
 
 MsgSchema.pre('find', OwnerHelper.findByOwner)
