@@ -26,6 +26,19 @@ services:
     networks:
       - luubot-api
 
+  luubot-api:
+    depends_on:
+      - mongo
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/src
+    networks:
+      - luubot-api
+
 networks:
   luubot-api:
     external: false
